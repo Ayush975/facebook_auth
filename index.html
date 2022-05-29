@@ -47,7 +47,7 @@
 
       function statusChangeCallback(response) {
         if (response.status === "connected") {
-          console.log("Logged in and authenticated");
+          console.log("Logged in and authenticated", response);
           setElements(true);
           testAPI();
         } else {
