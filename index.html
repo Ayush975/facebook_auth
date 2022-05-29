@@ -25,14 +25,21 @@
           FB.AppEvents.logPageView();
         };
       }
+      function statusChangeCallback(response) {
+        if (response.status === "connected") {
+          console.log("Logged in and authenticated");
+          setElements(true);
+          testAPI();
+        } else {
+          console.log("Not authenticated");
+          setElements(false);
+        }
+      }
       function getAuthCode() {
         // Request authorization code and obtain user consent
         console.log("fired", FB);
         FB.getLoginStatus(function (response) {
-          if (response.status === "connected") {
-            var accessToken = response.authResponse.accessToken;
-            console.log(accessToken, response);
-          }
+          statusChangeCallback(response);
         });
         (function (d, s, id) {
           var js,
