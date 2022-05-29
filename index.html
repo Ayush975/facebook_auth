@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_US/sdk.js"
+      onload="initClient()"
+    ></script>
+  </head>
+  <body>
+    <script>
+      var client;
+      function initClient() {
+        window.fbAsyncInit = function () {
+          FB.init({
+            appId: "59563e90da7c30c763bc28e2d272e5a1",
+            cookie: true,
+            xfbml: true,
+            version: "v14.0",
+          });
+
+          FB.AppEvents.logPageView();
+        };
+      }
+      function getAuthCode() {
+        // Request authorization code and obtain user consent
+        FB.getLoginStatus(function (response) {
+          if (response.status === "connected") {
+            var accessToken = response.authResponse.accessToken;
+            console.log(accessToken);
+          }
+        });
+        (function (d, s, id) {
+          var js,
+            fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {
+            return;
+          }
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        })(document, "script", "facebook-jssdk");
+      }
+    </script>
+    <button onclick="getAuthCode()">Load Your Calendar</button>
+  </body>
+</html>
