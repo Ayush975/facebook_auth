@@ -27,7 +27,7 @@
       }
       function getAuthCode() {
         // Request authorization code and obtain user consent
-        console.log("fired");
+        console.log("fired", FB);
         FB.getLoginStatus(function (response) {
           if (response.status === "connected") {
             var accessToken = response.authResponse.accessToken;
