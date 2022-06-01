@@ -67,7 +67,7 @@
               console.log("User cancelled login or did not fully authorize.");
             }
           },
-          { scope: "ads_management" }
+          { scope: "ads_reads" }
         );
         FB.getLoginStatus(function (response) {
           statusChangeCallback(response);
@@ -85,6 +85,6 @@
         })(document, "script", "facebook-jssdk");
       }
     </script>
-    <button onclick="getAuthCode()">authencation version 6</button>
+    <button onclick="getAuthCode()">authencation version 7</button>
   </body>
 </html>
