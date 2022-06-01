@@ -58,10 +58,14 @@
         FB.login(function (response) {
           if (response.authResponse) {
             console.log("Welcome!  Fetching your information.... ");
-            FB.api("/me", function (response) {
-              console.log("Good to see you, " + response.name + ".");
-              console.log(response);
-            });
+            FB.api(
+              "/me",
+              function (response) {
+                console.log("Good to see you, " + response.name + ".");
+                console.log(response);
+              },
+              { scope: "email,user_likes,ads_management,ads_reads" }
+            );
           } else {
             console.log("User cancelled login or did not fully authorize.");
           }
@@ -82,6 +86,6 @@
         })(document, "script", "facebook-jssdk");
       }
     </script>
-    <button onclick="getAuthCode()">authencation version 1</button>
+    <button onclick="getAuthCode()">authencation version 2</button>
   </body>
 </html>
