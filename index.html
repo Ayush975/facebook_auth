@@ -25,24 +25,30 @@
           FB.AppEvents.logPageView();
         };
       }
-      function testAPI() {
-        FB.api("/me?fields=name,email,birthday,location", function (response) {
-          if (response && !response.error) {
-            console.log("test APi", response);
-          }
-
-          FB.api("/me/adaccounts", function (response) {
+      function testAPI(accessToken) {
+        FB.api(
+          `/me?fields=name,email,birthday,location?access_token=${accessToken}`,
+          function (response) {
             if (response && !response.error) {
-              console.log("test API", response);
+              console.log("test APi", response);
             }
-          });
-        });
+
+            FB.api(
+              `/me/adaccounts?access_token=${accessToken}`,
+              function (response) {
+                if (response && !response.error) {
+                  console.log("test API", response);
+                }
+              }
+            );
+          }
+        );
       }
       function statusChangeCallback(response) {
         if (response.status === "connected") {
           console.log("Logged in and authenticated", response);
-
-          testAPI();
+          const accessToken = response.authResponse.accessToken;
+          testAPI(accessToken);
         } else {
           console.log("Not authenticated");
         }
